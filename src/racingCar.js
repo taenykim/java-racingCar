@@ -20,6 +20,16 @@ const moveCar = (car, carNames, distances) => {
   result += `${car.name} : ${printDistance}<br/>`
 }
 
+const getWinner = (carNames, distances) => {
+  const max = Math.max(...distances)
+  let winner = ''
+
+  for (let i = 0; i < carNames.length; i++) {
+    if (max === distances[i]) winner += `${carNames[i]},`
+  }
+  return winner
+}
+
 const form = document.createElement('form')
 body.append(form)
 
@@ -60,13 +70,7 @@ form.addEventListener('submit', (e) => {
     result += '<br/>'
   }
 
-  const max = Math.max(...distances)
-  let winner = ''
-
-  for (let i = 0; i < cars.length; i++) {
-    if (max === distances[i]) winner += `${carNames[i]},`
-  }
-
+  let winner = getWinner(carNames, distances)
   result += `${winner.slice(0, winner.length - 1)}가 최종 우승했습니다.`
 
   makeDescription(result, body)
