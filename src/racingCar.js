@@ -1,10 +1,10 @@
 const { body } = document
 let result = '<br/>실행결과<br/>'
 
-const makeDescription = (string, divElem) => {
+const makeDescription = (string, parrentElem) => {
   const description = document.createElement('div')
   description.innerHTML = `${string}`
-  divElem.append(description)
+  parrentElem.append(description)
 }
 
 const makeCars = (cars, carNames, carDistances) => {
