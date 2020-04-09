@@ -7,6 +7,19 @@ const makeDescription = (string, divElem) => {
   divElem.append(description)
 }
 
+const moveCar = (car, carNames, distances) => {
+  let number = Math.floor(Math.random() * 9)
+  let printDistance = ''
+  if (number >= 4) {
+    car.go()
+    distances[carNames.indexOf(car.name)]++
+  }
+  for (let j = 0; j < car.position; j++) {
+    printDistance += '-'
+  }
+  result += `${car.name} : ${printDistance}<br/>`
+}
+
 const form = document.createElement('form')
 body.append(form)
 
@@ -42,16 +55,7 @@ form.addEventListener('submit', (e) => {
 
   for (let i = 0; i < count; i++) {
     cars.map((car) => {
-      let number = Math.floor(Math.random() * 9)
-      let printDistance = ''
-      if (number >= 4) {
-        car.go()
-        distances[carNames.indexOf(car.name)]++
-      }
-      for (let j = 0; j < car.position; j++) {
-        printDistance += '-'
-      }
-      result += `${car.name} : ${printDistance}<br/>`
+      moveCar(car, carNames, distances)
     })
     result += '<br/>'
   }

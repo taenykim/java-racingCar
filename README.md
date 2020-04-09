@@ -4,4 +4,4 @@
 
 ## 구현해야할 기능 목록
 
-주어진 횟수동안 자동차는 전진 혹은 멈춤.
+`moveCar(car, carNames, distances)`
