@@ -2,6 +2,8 @@
 
 자동차경주 게임 저장소
 
+https://taenykim.github.io/java-racingCar/
+
 ## 구현해야할 기능 목록
 
 `moveCar(car, carNames, distances)`
