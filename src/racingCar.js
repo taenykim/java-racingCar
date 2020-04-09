@@ -7,19 +7,19 @@ const makeDescription = (string, divElem) => {
   divElem.append(description)
 }
 
-const makeCars = (cars, carNames, distances) => {
+const makeCars = (cars, carNames, carDistances) => {
   for (let i = 0; i < carNames.length; i++) {
     cars[i] = new Car(carNames[i])
-    distances[i] = 0
+    carDistances[i] = 0
   }
 }
 
-const moveCar = (car, carNames, distances) => {
+const moveCar = (car, carNames, carDistances) => {
   let number = Math.floor(Math.random() * 9)
   let printDistance = ''
   if (number >= 4) {
     car.go()
-    distances[carNames.indexOf(car.name)]++
+    carDistances[carNames.indexOf(car.name)]++
   }
   for (let j = 0; j < car.position; j++) {
     printDistance += '-'
@@ -27,12 +27,12 @@ const moveCar = (car, carNames, distances) => {
   result += `${car.name} : ${printDistance}<br/>`
 }
 
-const getWinner = (carNames, distances) => {
-  const max = Math.max(...distances)
+const getWinner = (carNames, carDistances) => {
+  const max = Math.max(...carDistances)
   let winner = ''
 
   for (let i = 0; i < carNames.length; i++) {
-    if (max === distances[i]) winner += `${carNames[i]},`
+    if (max === carDistances[i]) winner += `${carNames[i]},`
   }
   return winner
 }
@@ -61,20 +61,20 @@ form.append(button)
 form.addEventListener('submit', (e) => {
   e.preventDefault()
   let carNames = carNamesInput.value.split(',')
+  let carDistances = []
   let count = countInput.value
   let cars = []
-  let distances = []
 
-  makeCars(cars, carNames, distances)
+  makeCars(cars, carNames, carDistances)
 
   for (let i = 0; i < count; i++) {
     cars.map((car) => {
-      moveCar(car, carNames, distances)
+      moveCar(car, carNames, carDistances)
     })
     result += '<br/>'
   }
 
-  let winner = getWinner(carNames, distances)
+  let winner = getWinner(carNames, carDistances)
   result += `${winner.slice(0, winner.length - 1)}가 최종 우승했습니다.`
 
   makeDescription(result, body)
