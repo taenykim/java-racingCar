@@ -8,9 +8,11 @@ const makeDescription = (string, parrentElem) => {
 }
 
 const checkCarsNameLength = (carNames) => {
+  const MAX_CARNAME_LENGTH = 5
   let errorCheck = false
+
   for (let i = 0; i < carNames.length; i++) {
-    if (carNames[i].length > 5) errorCheck = true
+    if (carNames[i].length > MAX_CARNAME_LENGTH) errorCheck = true
   }
   return errorCheck
 }
@@ -23,9 +25,11 @@ const makeCars = (cars, carNames, carDistances) => {
 }
 
 const moveCar = (car, carNames, carDistances) => {
-  let number = Math.floor(Math.random() * 9)
+  const RANDOM_NUMBER_RANGE = 9
+  const MOVE_CAR_CONDITION = 4
+  let number = Math.floor(Math.random() * RANDOM_NUMBER_RANGE)
   let printDistance = ''
-  if (number >= 4) {
+  if (number >= MOVE_CAR_CONDITION) {
     car.go()
     carDistances[carNames.indexOf(car.name)]++
   }
