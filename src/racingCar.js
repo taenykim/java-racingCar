@@ -23,18 +23,16 @@ const checkCarsNameLength = (carNames) => {
   return errorCheck
 }
 
-const makeCars = (cars, carNames, carDistances) => {
+const makeCars = (cars, carNames) => {
   for (let i = 0; i < carNames.length; i++) {
     cars[i] = new Car(carNames[i])
-    carDistances[i] = 0
   }
 }
 
-const moveCar = (car, carNames, carDistances) => {
+const moveCar = (car) => {
   let printDistance = ''
   if (checkMoveCarCondition()) {
     car.go()
-    carDistances[carNames.indexOf(car.name)]++
   }
   for (let j = 0; j < car.position; j++) {
     printDistance += '-'
@@ -42,14 +40,18 @@ const moveCar = (car, carNames, carDistances) => {
   result += `${car.name} : ${printDistance}<br/>`
 }
 
-const getWinner = (carNames, carDistances) => {
-  const max = Math.max(...carDistances)
-  let winner = ''
+const getWinner = (cars) => {
+  let max = 0
+  cars.map((car) => {
+    if (car.position > max) max = car.position
+  })
+  let winner = []
 
-  for (let i = 0; i < carNames.length; i++) {
-    if (max === carDistances[i]) winner += `${carNames[i]},`
-  }
-  return winner
+  cars.map((car) => {
+    if (max === car.position) winner.push(car.name)
+  })
+
+  return winner.join()
 }
 
 const form = document.createElement('form')
@@ -81,21 +83,21 @@ form.addEventListener('submit', (e) => {
     makeDescription('에러! 자동차이름은 5이하로 해야합니다', body)
     return
   }
-  let carDistances = []
+
   let count = countInput.value
   let cars = []
 
-  makeCars(cars, carNames, carDistances)
+  makeCars(cars, carNames)
 
   for (let i = 0; i < count; i++) {
     cars.map((car) => {
-      moveCar(car, carNames, carDistances)
+      moveCar(car)
     })
     result += '<br/>'
   }
 
-  let winner = getWinner(carNames, carDistances)
-  result += `${winner.slice(0, winner.length - 1)}가 최종 우승했습니다.`
+  let winner = getWinner(cars)
+  result += `${winner}가 최종 우승했습니다.`
 
   makeDescription(result, body)
 })
