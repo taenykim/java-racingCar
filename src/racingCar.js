@@ -1,6 +1,12 @@
 const { body } = document
 let result = '<br/>실행결과<br/>'
 
+const checkMoveCarCondition = () => {
+  const MOVE_CAR_CONDITION = 4
+  const RANDOM_NUMBER_RANGE = 9
+  return Math.floor(Math.random() * RANDOM_NUMBER_RANGE) >= MOVE_CAR_CONDITION ? 1 : 0
+}
+
 const makeDescription = (string, parrentElem) => {
   const description = document.createElement('div')
   description.innerHTML = `${string}`
@@ -25,11 +31,8 @@ const makeCars = (cars, carNames, carDistances) => {
 }
 
 const moveCar = (car, carNames, carDistances) => {
-  const RANDOM_NUMBER_RANGE = 9
-  const MOVE_CAR_CONDITION = 4
-  let number = Math.floor(Math.random() * RANDOM_NUMBER_RANGE)
   let printDistance = ''
-  if (number >= MOVE_CAR_CONDITION) {
+  if (checkMoveCarCondition()) {
     car.go()
     carDistances[carNames.indexOf(car.name)]++
   }
