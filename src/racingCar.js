@@ -7,6 +7,14 @@ const makeDescription = (string, parrentElem) => {
   parrentElem.append(description)
 }
 
+const checkCarsNameLength = (carNames) => {
+  let errorCheck = false
+  for (let i = 0; i < carNames.length; i++) {
+    if (carNames[i].length > 5) errorCheck = true
+  }
+  return errorCheck
+}
+
 const makeCars = (cars, carNames, carDistances) => {
   for (let i = 0; i < carNames.length; i++) {
     cars[i] = new Car(carNames[i])
@@ -61,6 +69,11 @@ form.append(button)
 form.addEventListener('submit', (e) => {
   e.preventDefault()
   let carNames = carNamesInput.value.split(',')
+
+  if (checkCarsNameLength(carNames) === true) {
+    makeDescription('에러! 자동차이름은 5이하로 해야합니다', body)
+    return
+  }
   let carDistances = []
   let count = countInput.value
   let cars = []

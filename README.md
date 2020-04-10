@@ -11,3 +11,5 @@ https://taenykim.github.io/java-racingCar/
 자동차 이동 : `moveCar(car, carNames, distances)`
 
 우승자 찾기 : `getWinner(carNames, distances)`
+
+자동차 이름 5이하 체크 : `checkCarsNameLength(carNames)`
