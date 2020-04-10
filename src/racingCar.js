@@ -15,10 +15,10 @@ const makeDescription = (string, parrentElem) => {
 
 const checkCarsNameLength = (carNames) => {
   const MAX_CARNAME_LENGTH = 5
-  let errorCheck = false
+  let errorCheck = true
 
   for (let i = 0; i < carNames.length; i++) {
-    if (carNames[i].length > MAX_CARNAME_LENGTH) errorCheck = true
+    if (carNames[i].length > MAX_CARNAME_LENGTH) errorCheck = false
   }
   return errorCheck
 }
@@ -79,7 +79,7 @@ form.addEventListener('submit', (e) => {
   e.preventDefault()
   let carNames = carNamesInput.value.split(',')
 
-  if (checkCarsNameLength(carNames) === true) {
+  if (checkCarsNameLength(carNames) === false) {
     makeDescription('에러! 자동차이름은 5이하로 해야합니다', body)
     return
   }
