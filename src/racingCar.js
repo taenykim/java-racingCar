@@ -4,7 +4,7 @@ let result = '<br/>실행결과<br/>'
 const checkMoveCarCondition = () => {
   const MOVE_CAR_CONDITION = 4
   const RANDOM_NUMBER_RANGE = 9
-  return Math.floor(Math.random() * RANDOM_NUMBER_RANGE) >= MOVE_CAR_CONDITION ? 1 : 0
+  return Math.floor(Math.random() * RANDOM_NUMBER_RANGE) >= MOVE_CAR_CONDITION ? true : false
 }
 
 const makeDescription = (string, parrentElem) => {
