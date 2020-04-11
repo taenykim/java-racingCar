@@ -15,12 +15,10 @@ const makeDescription = (string, parrentElem) => {
 
 const checkCarsNameLength = (carNames) => {
   const MAX_CARNAME_LENGTH = 5
-  let errorCheck = true
-
   for (let i = 0; i < carNames.length; i++) {
-    if (carNames[i].length > MAX_CARNAME_LENGTH) errorCheck = false
+    if (carNames[i].length > MAX_CARNAME_LENGTH) return false
   }
-  return errorCheck
+  return true
 }
 
 const makeCars = (cars, carNames) => {
